@@ -13,7 +13,9 @@ class Node<E> {
   /** The successor node of this node. */
   public Node<E> next;
 
-  /** Creates a node from the given data value and existing successor node. */
+  /**
+   * Creates a node from the given data value and existing successor node.
+   */
   public Node(final E data, final Node<E> next) {
     if (data == null) throw new IllegalArgumentException("data is null");
     this.data = data;

@@ -12,48 +12,43 @@ import java.util.NoSuchElementException;
 
 public class TestLinkedStack {
 
-  private IStack<String> fixture;
+	private IStack<String> fixture;
+	
+	@Before
+	public void setUp() {
+		fixture = new LinkedStack<>();
+	}
 
-  @Before
-  public void setUp() {
-    fixture = new LinkedStack<>();
-  }
+	@After
+	public void tearDown() {
+		fixture = null;
+	}
 
-  @After
-  public void tearDown() {
-    fixture = null;
-  }
-
-  @Test
-  public void testInitial() {
-    assertTrue(fixture.isEmpty());
-    try {
-      fixture.pop();
-      fail("java.util.NoSuchElementException expected");
+	@Test
+	public void testInitial() {
+		assertTrue(fixture.isEmpty());
+		try {
+		  fixture.pop();
+		  fail("java.util.NoSuchElementException expected");
     } catch (final NoSuchElementException ex) {
-      // exception occurred => all good
+		  // exception occurred => all good
     }
-    try {
-      fixture.peek();
-      fail("java.util.NoSuchElementException expected");
-    } catch (final NoSuchElementException ex) {
-      // exception occurred => all good
-    }
-  }
+	}
 
-  @Test
+	@Test
   public void testAfterPush() {
-    final String value = "hello";
-    fixture.push(value);
-    assertFalse(fixture.isEmpty());
-    assertEquals(value, fixture.peek());
+	  final String value = "hello";
+	  fixture.push(value);
+	  assertFalse(fixture.isEmpty());
+	  assertEquals(value, fixture.peek());
   }
 
   @Test
   public void testPushThenPop() {
     final String value = "hello";
     fixture.push(value);
-    assertEquals(value, fixture.pop());
+    final String result = fixture.pop();
+    assertEquals(value, result);
     assertTrue(fixture.isEmpty());
   }
 
@@ -63,8 +58,10 @@ public class TestLinkedStack {
     final String value2 = "world";
     fixture.push(value1);
     fixture.push(value2);
-    assertEquals(value2, fixture.pop());
-    assertEquals(value1, fixture.pop());
+    final String result2 = fixture.pop();
+    final String result1 = fixture.pop();
+    assertEquals(value1, result1);
+    assertEquals(value2, result2);
     assertTrue(fixture.isEmpty());
   }
 
@@ -82,7 +79,5 @@ public class TestLinkedStack {
     final List<String> list = fixture.asList();
     assertEquals(2, list.size());
     assertEquals(Arrays.asList(value2, value1), list);
-    final List<String> list2 = fixture.asList();
-    assertEquals(2, list2.size());
   }
 }
