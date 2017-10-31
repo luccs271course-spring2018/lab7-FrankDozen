@@ -54,4 +54,13 @@ public interface IStack<E> {
    * @return The list containing the items in the stack
    */
   List<E> asList();
+
+  /**
+   * Returns a Java list containing the items currently in the stack.
+   * The item at the bottom of the stack is the first item of the list (at index 0).
+   *
+   * @post The stack remains unchanged.
+   * @return The list containing the items in the stack
+   */
+  List<E> asFifoList();
 }
